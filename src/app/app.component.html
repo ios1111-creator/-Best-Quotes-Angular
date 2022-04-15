@@ -1,71 +1,85 @@
 <nav>
   <div class="nav-wrapper teal darken-3">
-    <span class="brand-logo center">Best quotes</span>
+    <span class="brand-logo center"> My Best Quotes</span>
   </div>
 </nav>
 
-<div>
-  <button class="btn-floating teal add-button"><i class="material-icons">add</i></button>
-  <div class="row">
+
+<div class="container q-container">
+
+  <button class="btn-floating teal add-button">
+    <i class="material-icons" (click)="show()">add</i>
+  </button>
+  <div class="row edit-row" [class.drawer]="showForm">
     <div class="input-field col s4">
-      <input type="text">
+      <input type="text" placeholder="Author" [(ngModel)]="quotation.author"/>
     </div>
     <div class="input-field col s6">
-      <input type="text">
+      <input type="text" placeholder="Quote" [(ngModel)]="quotation.sentence"/>
     </div>
     <div class="input-field col s2">
-      <button class="btn">Add</button>
+      <button class="btn small" (click)="onAddQuote()">Add</button>
     </div>
   </div>
 
+
   <div class="row">
+
     <div class="col s8">
-      <div>
-        <div>
-          <div class="card teal accent-5 hoverable">
+      <div class="row">
+        <div class="col s12">
+          <div class="card teal accent-4 hoverable"
+               *ngFor="let quotation of quotes;let odd=odd"
+               [ngClass]="odd?'accent-4':'accent-5'">
             <div class="card-content white-text">
               <span class="card-title">
-                Jeśli nie chcesz mojej zguby, krrrokodyla daj mi luby.
+                {{quotation.sentence}}
               </span>
-              Aleksander Fredro
+              {{quotation.author}}
             </div>
-            <div>
-              <span class="badge grey darken-2 left white-text">7</span>
-              <button class="btn blue mr-5">
+            <div class="card-action right-align">
+              <span class="badge grey darken-2 left white-text">{{quotation.votes}}</span>
+              <button class="btn blue mr-5" (click)="addVotes(quotation,+1)">
                 <i class="material-icons">exposure_plus_1</i>
               </button>
-              <button class="btn brown">
+              <button class="btn brown" (click)="addVotes(quotation,-1)">
                 <i class="material-icons">exposure_neg_1</i>
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
-
 
     <div class="col s4">
       <div class="col s12">
-        <h5>Best:</h5>
+        <h5>Best</h5>
         <div class="collection">
-          <p class="collection-items">
-            <span class="blue lighten-4 badge">7</span>
-            Jeśli nie chcesz mojej zguby, krrrokodyla daj mi luby. <br/>
-            <span class="blue-text">Aleksander Fredro</span>
-          </p>
+          <ng-container *ngFor="let quotation of quotes">
+            <p class="collection-item" *ngIf="quotation.votes>0">
+              <span class="blue lighten-4 badge">{{quotation.votes}}</span>
+              {{quotation.sentence}}<br/>
+              <span class="blue-text">{{quotation.author}}</span>
+            </p>
+          </ng-container>
         </div>
       </div>
+      <div class="col s12">
+        <h5>Worst</h5>
 
-        <div class="col s12">
-          <h5>Worst:</h5>
-          <div class="collection">
-            <p>
-              <span>Jeśli nie chcesz mojej zguby, krrrokodyla daj mi luby.</span>
-              <span>Aleksander Fredro</span>
-            </p>
-          </div>
+        <div class="collection">
+          <ng-container *ngFor="let quotation of quotes">
+            <p class="collection-item" *ngIf="quotation.votes<0">
+            <span class="blue lighten-4 badge">{{quotation.votes}}</span>
+            {{quotation.sentence}}<br/>
+            <span class="blue-text">{{quotation.author}}</span>
+          </p>
+          </ng-container>
+
         </div>
-
+      </div>
     </div>
+
   </div>
 </div>

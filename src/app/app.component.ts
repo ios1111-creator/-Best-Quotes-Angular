@@ -11,8 +11,6 @@ export class AppComponent {
   title = 'my-best-quotes';
   showForm: boolean = false;
   quotes: Quotation[] = quotes;
-  sentence: string = '';
-  author: string = '';
   quotation: Quotation = {author: '', sentence: '', votes: 0}
 
   show() {
@@ -26,5 +24,13 @@ export class AppComponent {
 
   addVotes(quotation: Quotation, value: number) {
     quotation.votes += value
+  }
+
+  bestQuotes() {
+    return this.quotes.filter(q => q.votes > 0);
+  }
+
+  worstQuotes() {
+    return this.quotes.filter(q => q.votes < 0)
   }
 }

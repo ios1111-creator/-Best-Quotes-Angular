@@ -2,7 +2,7 @@
   margin-right: 5px;
 }
 .edit-row{
-  transition: 0.5s ease-in-out;
+  transition: 0.9s ease-in-out;
   transform: translateX(-200%);
 }
 .drawer{

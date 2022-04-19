@@ -1,0 +1,18 @@
+.mr-5{
+  margin-right: 5px;
+}
+.edit-row{
+  transition: 0.9s ease-in-out;
+  transform: translateX(-200%);
+}
+.drawer{
+  transform: translateX(0)
+}
+.q-container{
+  position: relative;
+}
+.add-button{
+  position:absolute;
+  right: 0;
+  top: -22px;
+}
